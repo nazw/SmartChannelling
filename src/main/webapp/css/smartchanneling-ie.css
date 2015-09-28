@@ -1,0 +1,11 @@
+@charset "utf-8";
+/* CSS Document */
+
+.row .textField{
+    border:1px solid #c7c7c7;
+	}
+	
+
+.row .textArea{
+    border:1px solid #c7c7c7;
+}

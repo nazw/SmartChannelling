@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+    <definition name="admin.dashboard" template="/WEB-INF/views/layouts/dashboardLayout.jsp">
+        <put-attribute name="title" value="Smart Channeling" />
+        <put-attribute name="header" value="/WEB-INF/views/commons/header.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/views/commons/menu.jsp" />     
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/views/commons/footer.jsp" />
+    </definition>  
+    
+    <definition name="home.definition" template="/WEB-INF/views/layouts/homeLayout.jsp">
+        <put-attribute name="title" value="" />    
+        <put-attribute name="body" value="" /> 
+    </definition> 
+	
+        	<!-- Definition for admin dashboard -->	
+    
+    <definition name="adminDashboad" extends="admin.dashboard">
+        <put-attribute name="title" value="SmartChannelling Admin Page" />
+        <put-attribute name="body" value="/WEB-INF/views/content/adminDashboad.jsp" />		
+    </definition>
+    
+	<!-- Definition for admin add hospital-->	
+    <definition name="addHospital" extends="admin.dashboard">
+        <put-attribute name="title" value="SmartChannelling Admin Page" />
+        <put-attribute name="body" value="/WEB-INF/views/content/addHospital.jsp" />		
+    </definition>  
+    
+    <!-- Definition for admin add hospital-->	
+    <definition name="getHospitalManagerDetail" extends="admin.dashboard">
+        <put-attribute name="title" value="SmartChannelling Admin Page" />
+        <put-attribute name="body" value="/WEB-INF/views/content/getHospitalManagerDetail.jsp" />		
+    </definition>    
+    
+	<!-- Definition for admin add doctor-->	
+    <definition name="addDoctor" extends="admin.dashboard">
+        <put-attribute name="title" value="SmartChannelling Admin Page" />
+        <put-attribute name="body" value="/WEB-INF/views/content/addDoctor.jsp" />		
+    </definition> 
+    
+    	<!-- Definition for admin add new designation -->	
+    <definition name="updateHospitalRole" extends="admin.dashboard">
+        <put-attribute name="title" value="SmartChannelling Admin Page" />
+        <put-attribute name="body" value="/WEB-INF/views/content/editHospitalRole.jsp" />		
+    </definition> 
+    
+    	<!-- Definition for admin add new designation -->	
+    <definition name="addHospitalRole" extends="admin.dashboard">
+        <put-attribute name="title" value="SmartChannelling Admin Page" />
+        <put-attribute name="body" value="/WEB-INF/views/content/addHospitalRole.jsp" />		
+    </definition> 
+    
+   
+    
+            	<!-- Definition for admin update Hospital -->	
+    <definition name="editHospital" extends="admin.dashboard">
+        <put-attribute name="title" value="SmartChannelling Admin Page" />
+        <put-attribute name="body" value="/WEB-INF/views/content/editHospital.jsp" />		
+    </definition> 
+    
+                	<!-- Definition for admin add Visiting Time -->	
+    <definition name="createVisitingTime" extends="admin.dashboard">
+        <put-attribute name="title" value="SmartChannelling Admin Page" />
+        <put-attribute name="body" value="/WEB-INF/views/content/addVisitingTime.jsp" />		
+    </definition>
+    
+                    	<!-- Definition for admin add Visiting Time -->	
+    <definition name="addVisitingTime" extends="admin.dashboard">
+        <put-attribute name="title" value="SmartChannelling Admin Page" />
+        <put-attribute name="body" value="/WEB-INF/views/content/addVisitingTime.jsp" />		
+    </definition>
+    
+                        	<!-- Definition for admin add Visiting Time -->	
+    <definition name="addSpecialization" extends="admin.dashboard">
+        <put-attribute name="title" value="SmartChannelling Admin Page" />
+        <put-attribute name="body" value="/WEB-INF/views/content/addSpecialization.jsp" />		
+    </definition>
+    
+    <definition name="editSpecialization" extends="admin.dashboard">
+        <put-attribute name="title" value="SmartChannelling Admin Page" />
+        <put-attribute name="body" value="/WEB-INF/views/content/editSpecialization.jsp" />		
+    </definition>
+    
+    <!-- FOR THE LISTINGS -->
+    <definition name="listVisitings" extends="admin.dashboard">
+        <put-attribute name="title" value="SmartChannelling Admin Page" />
+        <put-attribute name="body" value="/WEB-INF/views/content/listAllVisitingTimes.jsp" />		
+    </definition>
+    
+                	<!-- Definition for manage Specialization -->	
+    <definition name="manageSpecialization" extends="admin.dashboard">
+        <put-attribute name="title" value="SmartChannelling Admin Page" />
+        <put-attribute name="body" value="/WEB-INF/views/content/manageSpecialization.jsp" />		
+    </definition> 
+    
+                    	<!-- Definition for manage HospitalRoles -->	
+    <definition name="manageHospitalRoles" extends="admin.dashboard">
+        <put-attribute name="title" value="SmartChannelling Admin Page" />
+        <put-attribute name="body" value="/WEB-INF/views/content/manageHospitalRoles.jsp" />		
+    </definition>
+    
+                        	<!-- Definition for manage Hospitals -->	
+    <definition name="manageHospitals" extends="admin.dashboard">
+        <put-attribute name="title" value="SmartChannelling Admin Page" />
+        <put-attribute name="body" value="/WEB-INF/views/content/manageHospitals.jsp" />		
+    </definition>
+    
+                            	<!-- Definition for manage Doctors -->	
+    <definition name="manageDoctors" extends="admin.dashboard">
+        <put-attribute name="title" value="SmartChannelling Admin Page" />
+        <put-attribute name="body" value="/WEB-INF/views/content/manageDoctors.jsp" />		
+    </definition>
+    
+    	<!-- Definition for add patient -->	
+    <definition name="addPatient" extends="admin.dashboard">
+        <put-attribute name="title" value="SmartChannelling Admin Page" />
+        <put-attribute name="body" value="/WEB-INF/views/content/addPatient.jsp" />		
+    </definition> 
+        	<!-- Definition for manageVisitingSlots -->	
+    <definition name="manageVisitingSlots" extends="admin.dashboard">
+        <put-attribute name="title" value="SmartChannelling Admin Page" />
+        <put-attribute name="body" value="/WEB-INF/views/content/manageVisitingSlots.jsp" />		
+    </definition> 
+    
+        	<!-- Definition for appointmentConfirmation -->	
+    <definition name="appointmentConfirmation" extends="admin.dashboard">
+        <put-attribute name="title" value="SmartChannelling Admin Page" />
+        <put-attribute name="body" value="/WEB-INF/views/content/appointmentConfirmation.jsp" />		
+    </definition>
+    
+        	<!-- Definition for edit patient -->	
+    <definition name="editPatient" extends="admin.dashboard">
+        <put-attribute name="title" value="SmartChannelling Admin Page" />
+        <put-attribute name="body" value="/WEB-INF/views/content/editPatient.jsp" />		
+    </definition> 
+    
+    
+                        	<!-- Definition for error page -->	
+    <definition name="error" extends="home.definition">
+        <put-attribute name="title" value="SmartChannelling Error Page" />
+        <put-attribute name="body" value="/WEB-INF/views/content/error.jsp" />		
+    </definition>
+    
+</tiles-definitions>

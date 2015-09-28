@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	http://www.springframework.org/schema/task
+	http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+	<!-- Enable aspectj proxy creation -->
+    <aop:aspectj-autoproxy/>
+
+    <context:property-placeholder location="classpath:jdbc.properties" />
+
+	<!-- Scans the classpath of this application for @Components to deploy as beans -->
+    <context:component-scan base-package="com.visni.smartchannelling" />
+
+	<!-- Configures the @Controller programming model -->
+    <mvc:annotation-driven />
+
+    <context:annotation-config />
+
+	<!-- enable declarative transaction management -->
+    <tx:annotation-driven />
+    
+    <task:scheduler id="scheduler" pool-size="10"/>
+    <task:executor id="executor" pool-size="10"/>
+    <task:annotation-driven scheduler="scheduler" executor="executor"/>
+
+	<!-- Validator -->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+
+	<!-- For annotated methods and types -->
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" ></bean>
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+
+    <bean id="tilesViewResolver"
+		class="org.springframework.js.ajax.AjaxUrlBasedViewResolver">
+        <property name="viewClass" value="org.springframework.webflow.mvc.view.FlowAjaxTilesView"/>        
+    </bean>
+
+    <bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/spring-config/tiles.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="classpath:messages" />
+        <property name="defaultEncoding" value="UTF-8" />
+    </bean>
+
+    <bean id="localeChangeInterceptor"
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+        <property name="paramName" value="lang" />
+    </bean>
+
+    <bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+        <property name="defaultLocale" value="en" />
+    </bean>
+	
+    <bean id="handlerMapping"
+			class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+        <property name="interceptors">
+            <ref bean="localeChangeInterceptor" />
+        </property>
+    </bean>
+
+    <bean id="multipartResolver"
+    	class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    	<!-- one of the properties available; the maximum file size in bytes -->
+        <property name="maxUploadSize" value="200000000"/>
+    </bean>
+    
+   
+    <bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${hibernate.connection.driver_class}" />
+        <property name="url" value="${hibernate.connection.url}" />
+        <property name="username" value="${hibernate.connection.username}" />
+        <property name="password" value="${hibernate.connection.password}" />
+    </bean>
+
+    <bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="annotatedClasses">
+            <list>
+                <value>com.visni.smartchannelling.entity.Address</value>
+                <value>com.visni.smartchannelling.entity.Appointment</value>
+                <value>com.visni.smartchannelling.entity.ContactNumber</value>
+                <value>com.visni.smartchannelling.entity.Doctor</value>
+                <value>com.visni.smartchannelling.entity.DoctorHospitalRole</value>
+                <value>com.visni.smartchannelling.entity.DoctorSpecialization</value>
+                <value>com.visni.smartchannelling.entity.EmailAddress</value>
+                <value>com.visni.smartchannelling.entity.Hospital</value>
+                <value>com.visni.smartchannelling.entity.HospitalDoctor</value>              
+                <value>com.visni.smartchannelling.entity.HospitalManager</value>               
+                <value>com.visni.smartchannelling.entity.HospitalRole</value>
+                <value>com.visni.smartchannelling.entity.HospitalSpecialization</value>
+                <value>com.visni.smartchannelling.entity.Specialization</value>   
+                <value>com.visni.smartchannelling.entity.SystemUser</value>
+                <value>com.visni.smartchannelling.entity.SystemUserDetail</value>  
+                <value>com.visni.smartchannelling.entity.UserRole</value>
+                <value>com.visni.smartchannelling.entity.Visiting</value>
+                <value>com.visni.smartchannelling.entity.VisitingSolts</value>  
+                
+                   
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.connection.provider_class">${hibernate.connection.provider_class}</prop>
+				<prop key="hibernate.connection.pool_size">${hibernate.connection.pool_size}</prop>
+                <prop key="hibernate.c3p0.min_size">${hibernate.c3p0.min_size}</prop>
+                <prop key="hibernate.c3p0.max_size">${hibernate.c3p0.max_size}</prop>
+                <prop key="hibernate.c3p0.timeout">${hibernate.c3p0.timeout}</prop>
+                <prop key="hibernate.c3p0.max_statements">${hibernate.c3p0.max_statements}</prop>
+                <prop key="hibernate.c3p0.acquire_increment">${hibernate.c3p0.acquire_increment}</prop>
+                <prop key="hibernate.c3p0.max_numHelperThreads">${hibernate.c3p0.max_numHelperThreads}</prop>
+                <prop key="hibernate.jdbc.use_streams_for_binary">${hibernate.jdbc.use_streams_for_binary}</prop>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+                <prop key="hibernate.search.default.directory_provider">${hibernate.search.default.directory_provider}</prop>
+                <prop key="hibernate.search.default.indexBase">${hibernate.search.default.indexBase}</prop>
+                <prop key="hibernate.connection.useUnicode">${hibernate.connection.useUnicode}</prop>
+                <prop key="hibernate.connection.characterEncoding">${hibernate.connection.characterEncoding}</prop>
+                <prop key="hibernate.connection.defaultNChar">${hibernate.connection.defaultNChar}</prop>
+                <prop key="hibernate.search.analyzer">${hibernate.search.analyzer}</prop>
+                <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+                <prop key="hibernate.use_sql_comments">${hibernate.use_sql_comments}</prop> 
+				
+            </props>
+        </property>
+    </bean>
+
+    <bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+</beans>
+
+
+
